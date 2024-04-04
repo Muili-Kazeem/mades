@@ -1,0 +1,37 @@
+<section class="main_wrapper">
+  <form>
+    <div class="search">
+      <div class="search_filter">
+        <input
+          type="search"
+          placeholder="Search users"
+          #input
+          [formControl]="searchBox"
+        />
+        <!-- <mat-icon aria-hidden="false" aria-label="search users" fontIcon="search"></mat-icon> -->
+      </div>
+    </div>
+  </form>
+
+  <div class="grid_wrapper" *ngIf="filteredUsers$ | async as filteredUsers">
+    <div class="user_grid">
+      <app-user-card
+        *ngFor="let user of filteredUsers"
+        [user]="user"
+        [routerLink]="['user', user.id]"
+      >
+      </app-user-card>
+    </div>
+
+    <ng-container *ngIf="totalNoOfUsers$ | async as totalNoOfUsers">
+      <ng-container *ngIf="per_page$ | async as per_page">
+        <app-pagination
+          [totalItems]="totalNoOfUsers"
+          [itemsPerPage]="per_page"
+          (pageChange)="pageChange($event)"
+        >
+        </app-pagination>
+      </ng-container>
+    </ng-container>
+  </div>
+</section>

@@ -1,0 +1,115 @@
+.card {
+  box-shadow: 0 0 4px -1px rgba(black, .3);
+  border-radius: 10px;
+  max-width: 700px;
+  height: 400px;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 200ms ease;
+
+  &:hover {
+    box-shadow: 0 5px 20px rgba(black, .3);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(#000000, 0.3);
+    z-index: 5;
+  }
+
+  &_avatar {
+    width: 100%;
+    height: 100%;
+  }
+
+  &_detail {
+    color: white;
+    --pad: 1.5rem;
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--pad);
+    padding-top: 2rem;
+    background: linear-gradient(hsl(0 0% 0% / 0), hsl(20 0% 0% / .3) 30%, hsl(0 0% 0% / 1));
+    transform: translateY(20%);
+    transition: all 500ms ease;
+
+    & > *:not(.name) {
+      opacity: 0;
+      transition: opacity 500ms linear;
+    }
+
+    .name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      width: max-content;
+      max-width: 100%;
+      line-height: 1;
+      position: relative;
+      text-shadow: 0px 0px 10px black;
+
+      &::after {
+        content: "";
+        height: 3px;
+        width: calc(100% + var(--pad));
+        position: absolute;
+        background: gold;
+        bottom: 40px;
+        left: calc(var(--pad) * -1);
+        transform-origin: left;
+        transform: scaleX(0);
+        transition: all 500ms ease;
+      }
+    }
+
+    .email {
+      font-weight: 300;
+      font-size: .85rem;
+      line-height: 2;
+    }
+  }
+}
+
+.card.slide .card_detail {
+  transform: translateY(0%);
+  transition-delay: 500ms;
+}
+
+.card.slide .card_detail > *:not(.name) {
+  opacity: 1;
+  transition-delay: 1000ms;
+}
+
+.card.slide .name::after {
+  transform: scaleX(0.7);
+}
+
+
+/* Effects in devices with Hover as primary pointing interaction */
+@media (hover) {
+  .card:hover .card_detail,
+  .card:focus-within .card_detail {
+    transform: translateY(0%);
+    transition-delay: 500ms;
+  }
+
+  .card:hover .card_detail > *:not(.name),
+  .card:focus-within .card_detail > *:not(.name) {
+    opacity: 1;
+    transition-delay: 1000ms;
+  }
+
+  .card:hover .name::after,
+  .card:focus-within .name::after {
+    transform: scaleX(1.2);
+  }
+}

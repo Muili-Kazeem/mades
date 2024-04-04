@@ -1,0 +1,23 @@
+<div class="main_wrapper">
+  <button
+    class="btn"
+    (click)="back()"
+  >
+    Back
+  </button>
+
+  <div class="wrapper" *ngIf="user$ | async as user">
+    <div class="bcg">
+      <img src="../../../../assets/jpg/pexels-codioful-(formerly-gradienta)-6985045.jpg" alt="">
+    </div>
+    <div class="profile">
+      <div class="profile_img">
+        <img src={{user.avatar}} alt="user_avatar">
+      </div>
+      <div class="profile_details">
+        <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+        <p>{{ user.email }}</p>
+      </div>
+    </div>
+  </div>
+</div>
